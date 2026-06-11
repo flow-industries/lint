@@ -73,5 +73,6 @@ Inputs:
 | Input | Default | Notes |
 |---|---|---|
 | `runner` | `ubuntu-latest` | Use a self-hosted runner label (e.g. `flow-arc`) for private repos; public repos stay on `ubuntu-latest`. |
+| `install-cmd` | `bun install --frozen-lockfile` | Override to add flags such as `--ignore-scripts` when a transitive dep's native build breaks on the runner. |
 | `typecheck-cmd` | `bun run typecheck` | Override for repos whose typecheck needs codegen first. |
-| `run-build` | `false` | Set `true` to also run `bun run build`. |
+| `run-build` | `false` | Set `true` to also run `bun run build`. Skip for react-router apps — building under Bun hits the `react-dom/server.bun.js` `renderToPipeableStream` gap; let the docker job build under Node instead. |
