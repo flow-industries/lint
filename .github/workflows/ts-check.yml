@@ -6,6 +6,9 @@ on:
       runner:
         type: string
         default: ubuntu-latest
+      install-cmd:
+        type: string
+        default: "bun install --frozen-lockfile"
       typecheck-cmd:
         type: string
         default: "bun run typecheck"
@@ -21,7 +24,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.2.x"
-      - run: bun install --frozen-lockfile
+      - run: ${{ inputs.install-cmd }}
       - run: bun run lint
       - run: ${{ inputs.typecheck-cmd }}
       - if: ${{ inputs.run-build }}
