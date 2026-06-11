@@ -1,5 +1,5 @@
 {
-  "name": "@flow-industries/biome-config",
+  "name": "@flow-industries/lint",
   "version": "0.1.0",
   "description": "Shared Biome configuration for Flow TypeScript projects",
   "license": "MIT",

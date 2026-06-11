@@ -1,4 +1,4 @@
-# @flow-industries/biome-config
+# @flow-industries/lint
 
 Shared [Biome](https://biomejs.dev) configuration and a reusable CI workflow for Flow's TypeScript projects.
 
@@ -6,15 +6,15 @@ This repo is the single source of truth for code-quality rules across `auth`, `s
 
 ## Biome config
 
-Two presets are published as `@flow-industries/biome-config`:
+Two presets are published as `@flow-industries/lint`:
 
-- `@flow-industries/biome-config/biome` — the self-contained core (formatter + recommended lint, no framework domain)
-- `@flow-industries/biome-config/react` — additive: adds only Biome's `react` lint domain on top of the core
+- `@flow-industries/lint/biome` — the self-contained core (formatter + recommended lint, no framework domain)
+- `@flow-industries/lint/react` — additive: adds only Biome's `react` lint domain on top of the core
 
 ### Use it
 
 ```sh
-bun add -d @flow-industries/biome-config @biomejs/biome@2.4.12
+bun add -d @flow-industries/lint @biomejs/biome@2.4.12
 ```
 
 Add a `biome.json` to the repo root. React projects extend **both** presets (Biome merges them left to right):
@@ -22,8 +22,8 @@ Add a `biome.json` to the repo root. React projects extend **both** presets (Bio
 ```jsonc
 {
   "extends": [
-    "@flow-industries/biome-config/biome",
-    "@flow-industries/biome-config/react"
+    "@flow-industries/lint/biome",
+    "@flow-industries/lint/react"
   ],
   "files": { "includes": ["**", "!dist"] }
 }
@@ -32,7 +32,7 @@ Add a `biome.json` to the repo root. React projects extend **both** presets (Bio
 A non-React project extends just the core:
 
 ```jsonc
-{ "extends": ["@flow-industries/biome-config/biome"], "files": { "includes": ["**", "!dist"] } }
+{ "extends": ["@flow-industries/lint/biome"], "files": { "includes": ["**", "!dist"] } }
 ```
 
 The `react` preset is additive on purpose — it carries only the domain, never its own copy of the formatter/core rules. (A relative `extends` *inside* a published package does not resolve from a consumer's `node_modules`, so the core can't be pulled in transitively; listing both presets in the consumer is the reliable pattern.) Per-repo ignores (generated dirs, vendored code) go in the local stub via `files.includes` — Biome merges these arrays additively with the shared presets. Keep `@biomejs/biome` pinned to the exact version above so every repo lints with an identical rule set.
