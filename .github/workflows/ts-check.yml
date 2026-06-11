@@ -1,0 +1,28 @@
+name: ts-check
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        type: string
+        default: ubuntu-latest
+      typecheck-cmd:
+        type: string
+        default: "bun run typecheck"
+      run-build:
+        type: boolean
+        default: false
+
+jobs:
+  quality:
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.2.x"
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: ${{ inputs.typecheck-cmd }}
+      - if: ${{ inputs.run-build }}
+        run: bun run build

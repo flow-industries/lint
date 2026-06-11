@@ -1,0 +1,24 @@
+{
+  "name": "@flow-industries/biome-config",
+  "version": "0.1.0",
+  "description": "Shared Biome configuration for Flow TypeScript projects",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flow-industries/lint.git"
+  },
+  "files": [
+    "biome.base.json",
+    "biome.react.json"
+  ],
+  "exports": {
+    "./biome": "./biome.base.json",
+    "./react": "./biome.react.json"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.12"
+  }
+}
