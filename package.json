@@ -19,7 +19,6 @@
   "exports": {
     "./biome": "./biome.base.json",
     "./react": "./biome.react.json",
-    "./oxlint": "./oxlint.base.json",
     "./anti-slop": "./dist/anti-slop.mjs"
   },
   "devDependencies": {

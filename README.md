@@ -68,7 +68,7 @@ Add an `.oxlintrc.json` to the repo root:
 
 ```jsonc
 {
-  "extends": ["./node_modules/@flow-industries/lint/oxlint"],
+  "extends": ["./node_modules/@flow-industries/lint/oxlint.base.json"],
   "jsPlugins": [
     { "name": "anti-slop", "specifier": "@flow-industries/lint/anti-slop" }
   ],
@@ -76,8 +76,9 @@ Add an `.oxlintrc.json` to the repo root:
 }
 ```
 
-Unlike Biome, Oxlint's `extends` **does** resolve into a consumer's `node_modules`, so the rule list
-is inherited rather than copied. Two things must stay local, though:
+Unlike Biome, Oxlint's `extends` **does** reach into a consumer's `node_modules`, so the rule list is
+inherited rather than copied — but it resolves plain **file paths**, not package `exports`, so the
+path above must name `oxlint.base.json` directly. Two things must stay local:
 
 - **`jsPlugins`** — a plugin declared in the extended config is not inherited, so each repo repeats
   this one line. The bare package specifier resolves through the package's `exports`.
