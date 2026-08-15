@@ -1,7 +1,7 @@
 {
   "name": "@flow-industries/lint",
-  "version": "0.1.0",
-  "description": "Shared Biome configuration for Flow TypeScript projects",
+  "version": "0.2.0",
+  "description": "Shared Biome + Oxlint configuration for Flow TypeScript projects",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -12,13 +12,35 @@
   },
   "files": [
     "biome.base.json",
-    "biome.react.json"
+    "biome.react.json",
+    "oxlint.base.json",
+    "dist"
   ],
   "exports": {
     "./biome": "./biome.base.json",
-    "./react": "./biome.react.json"
+    "./react": "./biome.react.json",
+    "./oxlint": "./oxlint.base.json",
+    "./anti-slop": "./dist/anti-slop.mjs"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.12"
+    "@biomejs/biome": "2.4.12",
+    "@oxlint/plugins": "1.78.0",
+    "oxlint": "1.78.0"
+  },
+  "scripts": {
+    "build": "bun build ./oxlint/anti-slop/index.ts --outfile dist/anti-slop.mjs --target node --format esm --external @oxlint/plugins",
+    "prepublishOnly": "bun run build"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.78.0",
+    "@oxlint/plugins": ">=1.78.0"
+  },
+  "peerDependenciesMeta": {
+    "oxlint": {
+      "optional": true
+    },
+    "@oxlint/plugins": {
+      "optional": true
+    }
   }
 }
