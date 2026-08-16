@@ -1,1 +1,1 @@
-{ "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json", "linter": { "domains": { "react": "recommended" } } }
+{ "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json", "linter": { "domains": { "react": "recommended" } } }

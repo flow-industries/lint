@@ -15,9 +15,6 @@ on:
       run-build:
         type: boolean
         default: false
-      node-version:
-        type: string
-        default: "22"
 
 jobs:
   quality:
@@ -27,11 +24,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.2.x"
-      # Oxlint shells out to Node to load the anti-slop JS plugin; the ARC runner
-      # image has no Node of its own, so pin one rather than inherit the runner's.
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node-version }}
       - run: ${{ inputs.install-cmd }}
       - run: bun run lint
       - run: ${{ inputs.typecheck-cmd }}
