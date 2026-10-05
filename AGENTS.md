@@ -4,7 +4,7 @@ This file provides guidance to agents working with code in this repository.
 
 `@flow-industries/lint` publishes the shared Biome preset (`biome.base.json`, `biome.react.json`)
 and the reusable `ts-check` workflow that every TypeScript repo in the Flow fleet runs in CI.
-Consumers extend **both** presets and pin Biome to an exact version.
+Consumers extend the base preset (React apps also extend the React preset) and pin Biome to an exact version.
 
 ## Publishing
 
@@ -25,4 +25,4 @@ token stored anywhere). There is no build: `files` ships the two preset files di
 Every TypeScript repo extends this preset, so tightening a lint rule fails CI everywhere the moment
 consumers pick it up — not in this repo, where there is almost nothing to lint. Before publishing a
 rule change, check what it does to the repos that consume it (`auth`, `voice`, `talk`, `site`,
-`docs`, `ui`, `status`), and prefer landing the fix in those repos first.
+`docs`, `ui`, `status`, `dash`, `time`, `note`, `hook`), and prefer landing the fix in those repos first.
